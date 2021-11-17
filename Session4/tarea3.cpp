@@ -8,17 +8,17 @@ struct Contacto
     string mail;
 };
 
-void agregarContacto(Contacto* contacto, Contacto* lista, int* posicion)
+void agregarContacto(Contacto* contacto, Contacto** lista, int* posicion)
 {
-    lista[*posicion] = *contacto;
+    lista[*posicion] = contacto;
     (*posicion)++;
 }
 
-int buscarNombre(Contacto* lista, int size, string nombre)
+int buscarNombre(Contacto** lista, int size, string nombre)
 {
     for(int i=0; i<size; i++)
     {
-        if (lista[i].nombre == nombre)
+        if (lista[i]->nombre == nombre)
         {
             return i;
         }
@@ -26,12 +26,12 @@ int buscarNombre(Contacto* lista, int size, string nombre)
     return -1;
 }
 
-void modificarContacto(Contacto* lista, int size, string nombre, string nuevoMail)
+void modificarContacto(Contacto** lista, int size, string nombre, string nuevoMail)
 {
     int pos = buscarNombre(lista, size, nombre);
     if (pos != -1)
     {
-        lista[pos].mail = nuevoMail; 
+        lista[pos]->mail = nuevoMail; 
     }
     else
     {
@@ -41,10 +41,10 @@ void modificarContacto(Contacto* lista, int size, string nombre, string nuevoMai
 
 int main()
 {
-    Contacto* listaDeContactos;
+    Contacto** listaDeContactos;
     int size_contactos = 100;
     int numero_elementos_agregados = 0;
-    listaDeContactos = new Contacto[size_contactos];
+    listaDeContactos = new Contacto*[size_contactos];
 
     Contacto pedrito;
     pedrito.nombre = "Pedrito";
