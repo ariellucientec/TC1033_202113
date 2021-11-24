@@ -4,7 +4,7 @@ using namespace std;
 
 struct Persona
 {
-    string nombre;
+    string nombre = "default";
     string correo;
     int presupuesto;
 };
@@ -81,12 +81,23 @@ int main()
     juanito.correo = "juanito@tec.mx";
     juanito.presupuesto = 1000;
 
+    Persona pedrito;
+    juanito.nombre = "Pedrito";
+    juanito.correo = "pedrito@tec.mx";
+    juanito.presupuesto = 1000;
+
     int size = 10;
     int clientesRegistrados = 0;
     Cliente ** listaClientes = new Cliente*[size];
 
     venderBoletos(listaClientes, size, &clientesRegistrados, &juanito, "VIP", 200);
+    venderBoletos(listaClientes, size, &clientesRegistrados, &pedrito, "VIP", 200);
 
     imprimerClientesAtendidos(listaClientes, size, clientesRegistrados);
 
+    for(int i=0; i<clientesRegistrados;i++)
+    {
+        delete listaClientes[i];
+    }
+    delete [] listaClientes;
 }
