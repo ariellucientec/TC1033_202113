@@ -45,26 +45,34 @@ class Seat
 private:
     int seatNumber;
     bool isReserved;
-public:
+    string tipoAsiento; // First class, Economy class, 
     Seat();
-    Seat(int seatNumber, bool isReserved);
+public:
+    Seat(int seatNumberP, bool isReservedP, string tipoAsientoP);
+    Seat(int seatNumberP, string tipoAsientoP);
 };
 
 Seat::Seat(){}
-Seat::Seat(int seatNumberP, bool isReservedP)
+Seat::Seat(int seatNumberP, bool isReservedP, string tipoAsientoP)
 {
     seatNumber = seatNumberP;
     isReserved = isReservedP;
+}
+Seat::Seat(int seatNumberP, string tipoAsientoP)
+{
+    seatNumber = seatNumberP;
+    isReserved = false;
 }
 
 class Flight
 {
 private:
+    int flyingHours;
     string destination;
-    Date dateOfFlight;
+    Date dateOfFlight;  //Composición
     int availableSeats;
-    Seat** theSeats;
-    Pilot* thePilot;
+    Seat** theSeats;    //Composición
+    Pilot* thePilot;    //Composición
 public:
     Flight();
     Flight(string destinationP, Date dateOfFlightP, int availableSeatsP, Pilot* thePilotP);
@@ -80,7 +88,7 @@ Flight::Flight(string destinationP, Date dateOfFlightP, int availableSeatsP, Pil
     theSeats = new Seat*[availableSeats];
     for(int i=0; i<availableSeats; i++)
     {
-        theSeats[i] = new Seat(i+1, false);
+        theSeats[i] = new Seat(i+1, "economy class");
     }
 }
 
