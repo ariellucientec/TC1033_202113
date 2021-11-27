@@ -1,0 +1,56 @@
+@startuml
+
+class Desinfectante
+{
+    -string nombre;
+    -string marca;
+    -double precio;
+
+    +Desinfectante();
+    +Desinfectante(strin nombreP, string marcaP, int precioP);
+    +string getNombre();
+    +string getMarca();
+    +double getPrecio();
+    +void imprimirDesinfectante();
+}
+
+class Tienda
+{
+    -int minStock;
+    -int contadorDesinfectantesEnStock;
+    -Desinfectante** listaDesinfectantes;
+    -Cliente** listaClientes;
+    -int contClientesAgregados;
+    -int maxSizeListaClientes;
+    -Tienda();
+
+    +Tienda(int minStockP);
+    +void listarProductos();
+    +void agregarDesinfectante(Desinfectante* d);
+    +int getMinStock();
+    +int getContadorDesinfectanteEnStock();
+    +void venderDesinfectante(Cliente* cliente);
+}
+
+class Cliente
+{
+    -string nombreCompleto;
+    -int idCliente;
+    -int maxSizeLista;
+    -int contProductosComprados;
+    -string* listaNombresProductosComprados;
+    -double totalGastado;
+    -Cliente();
+
+    +Cliente(string nombreCompletoP, int idClienteP);
+    +string getNombreCompleto();
+    +int getIdCliente();
+    +double getTotalGastado();
+    +void incrementarTotalGastado(double cantidadGastada);
+    +void agregarProductoComprado(string nombreProducto);
+}
+
+Tienda *-- Desinfectante
+Tienda *-- Cliente
+
+@enduml
